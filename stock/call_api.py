@@ -13,8 +13,8 @@ def call_api():
         "api_name": API_NAME,
         "token": TOKEN,
         "params" : {
-            "ts_code": "600233.SH",
-            "start_date": "20200512",
+            "ts_code": "603506.SH",
+            "start_date": "20190512",
             "end_date": "20200513",
         }
     }
