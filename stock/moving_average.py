@@ -8,6 +8,7 @@ URL="http://api.tushare.pro"
 API_NAME="daily"
 
 MA100 = 100
+MA20 = 20
 
 
 def _get_one_year_data_for_specific_stock():
@@ -43,16 +44,19 @@ def _covert_json_to_pandas_obj():
     return records_last_year
 
 
-def _cal_average_100_for_specific_date():
+def _ma100_ma20():
     data_last_year = _covert_json_to_pandas_obj()
     data_last_100_days = data_last_year[:MA100]
+    data_last_20_days = data_last_year[:MA20]
     avg_price_ma100 = data_last_100_days['close'].mean()
+    avg_price_ma20 = data_last_20_days['close'].mean()
     price_last_day = data_last_100_days['close'].values[0]
 
     # df = pd.DataFrame(data_last_year)
     print(avg_price_ma100)
+    print(avg_price_ma20)
     print(price_last_day)
 
 
 if __name__ == "__main__":
-    _cal_average_100_for_specific_date()
+    _ma100_ma20()
