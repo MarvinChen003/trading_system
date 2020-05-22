@@ -16,7 +16,11 @@ MA20 = 20
 LAST_TRADE_DATES = 20
 
 
-def _get_daily_trades_for_specific_stocks(stock_codes, start_date, end_date):
+def _get_daily_trades_for_specific_stocks(
+        stock_codes,
+        start_date,
+        end_date
+):
     payload = {
         "api_name": API_NAME,
         "token": TOKEN,
@@ -53,7 +57,7 @@ def _pandas_datafram_to_csv(pandas_dataframe, csv_file_name):
     pandas_dataframe.to_csv(csv_file_name)
 
 
-def _satisfy_ma100_strategy(stocks_dataframe):
+def _satisfy_ma100_ma20_strategy(stocks_dataframe):
     ts_codes = stocks_dataframe['ts_code'].unique()
     for ts_code in ts_codes:
         stock_dataframe = stocks_dataframe[stocks_dataframe['ts_code'] == ts_code]
@@ -91,7 +95,7 @@ def _satisfy_ma100_strategy(stocks_dataframe):
             positive_pool.append(ts_code)
 
         buy_pool = []
-        if ma20_matrix[-1] == 'Upon':
+        if ts_code in positive_pool and ma20_matrix[-1] == 'Upon':
             buy_pool.append(ts_code)
 
         return positive_pool, buy_pool
@@ -99,10 +103,10 @@ def _satisfy_ma100_strategy(stocks_dataframe):
 
 if __name__ == "__main__":
     stock_pool = ["603506.SH", "603530.SH", "603536.SH", "603578.SH", "603589.SH", "603535.SH"]
-    str_tock_pool = ','.join(stock_pool)
-    stocks_dataframe = _covert_json_to_pandas_dataframe(str_tock_pool)
+    str_stock_pool = ','.join(stock_pool)
+    stocks_dataframe = _covert_json_to_pandas_dataframe(str_stock_pool)
 
-    positive_stocks_pool, buy_pool = _satisfy_ma100_strategy(stocks_dataframe)
+    positive_stocks_pool, buy_pool = _satisfy_ma100_ma20_strategy(stocks_dataframe)
     if positive_stocks_pool:
         for stock in positive_stocks_pool:
             print(f'{stock} worth to have a trace this period of time.')

@@ -1,4 +1,5 @@
 20200515
+call_api.py
 
 tushare == 1.2.59
 
@@ -15,12 +16,17 @@ https://tushare.pro/document/2?doc_id=27
 ---
 
 20200516
+moving_average.py
 
-MA100 看涨， MA20 进场
+MA100 看涨， MA20 进场 
 
 ---
+20200517
 
 获取股票代码列表 
+https://tushare.pro/document/2?doc_id=25
+
+拿所有code 存成csv - get_all_stock_code_from_ts.py
 
 大面积计算 （MA20 也算 十日内刚突破的）
 
