@@ -59,6 +59,8 @@ def _pandas_datafram_to_csv(pandas_dataframe, csv_file_name):
 
 def _satisfy_ma100_ma20_strategy(stocks_dataframe):
     ts_codes = stocks_dataframe['ts_code'].unique()
+    positive_pool = []
+    buy_pool = []
     for ts_code in ts_codes:
         stock_dataframe = stocks_dataframe[stocks_dataframe['ts_code'] == ts_code]
         date_price_dict = pd.Series(stock_dataframe.close.values, index=stock_dataframe.trade_date).to_dict()
@@ -90,15 +92,13 @@ def _satisfy_ma100_ma20_strategy(stocks_dataframe):
         ma100_matrix.reverse()
         ma20_matrix.reverse()
 
-        positive_pool = []
         if all(x in ma100_matrix for x in ['Upon', 'Under']) and ma100_matrix[-1] == 'Upon':
             positive_pool.append(ts_code)
 
-        buy_pool = []
         if ts_code in positive_pool and ma20_matrix[-1] == 'Upon':
             buy_pool.append(ts_code)
 
-        return positive_pool, buy_pool
+    return positive_pool, buy_pool
 
 
 if __name__ == "__main__":
