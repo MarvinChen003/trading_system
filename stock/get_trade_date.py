@@ -4,7 +4,7 @@ import json
 import pandas as pd
 
 
-TOKEN="ea4fe281f13430950e3d7ad661af222ee5543e48d46198995693567d"
+TOKEN="PLEASE_USE_YOUR_OWN_TOKEN_TO_TUSHARE"
 URL="http://api.tushare.pro"
 API_NAME="trade_cal"
 
