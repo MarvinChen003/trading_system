@@ -1,0 +1,1 @@
+pytest -k divisible -v
